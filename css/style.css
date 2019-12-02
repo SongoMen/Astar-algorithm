@@ -25,5 +25,8 @@ html,body{
 .block{
     width: 25px;
     height: 25px;
-    border: 1px solid red
+    border: 0.5px solid #4287f5
+}
+.wall{
+    background-color: #4287f5;
 }

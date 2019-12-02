@@ -24,6 +24,11 @@ for(let i =0;i<height;i++){
         row.appendChild(block);
         block.className = `block`;
         block.id = `block-${b}`
+        block.onclick=function(){
+            this.className="block wall";
+            console.log("x")
+
+        }
     }
     document.getElementById("area").appendChild(row)
 }   
