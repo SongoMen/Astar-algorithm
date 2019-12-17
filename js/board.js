@@ -1,4 +1,10 @@
 let width, height;
+let board = []
+let startY;
+let startX;
+let endY;
+let endX;
+
 function renderArea() {
 	let headerHeight = document.getElementById("header").clientHeight,
 		body = document.body,
@@ -21,7 +27,10 @@ function renderArea() {
 	for (let i = 0; i < height; i++) {
 		let row = document.createElement("div");
 		row.className = `row-${i} row`;
+		board.push(1)
+		board[i] = []
 		for (let b = 0; b < width; b++) {
+			board[i].push(1)
 			let block = document.createElement("div");
 			row.appendChild(block);
 			block.className = `block`;
@@ -72,6 +81,9 @@ function renderPoints() {
 		`.row-${positions.start.y} #block-${positions.start.x}`
 	).id = "starting";
 
+	startY = positions.start.y
+	startX = positions.start.y
+
 	//end point
 
 	document.querySelector(
@@ -84,6 +96,10 @@ function renderPoints() {
 	document.querySelector(
 		`.row-${positions.end.y} #block-${positions.end.x}`
 	).classList += " ending";
+	console.log(positions.end)
+	endY = positions.end.y
+	endX = positions.end.x
+
 }
 
 renderArea();

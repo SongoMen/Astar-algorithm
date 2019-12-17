@@ -1,33 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta http-equiv="X-UA-Compatible" content="ie=edge">
-		<title>Pathfinding</title>
-		<link rel="stylesheet" href="./css/style.css">
 
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	</head>
-	<body>
-		<header class="header" id="header">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Pathfinding</title>
+	<link rel="stylesheet" href="./css/style.css">
 
-		</header>
-		<div class="area" id="area"></div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
 
-		<script src="./js/board.js"></script>
-		<script src="./js/astar.js"></script>
-		<script type='text/javascript'>
-			var graph = new Graph([
-				[1,1,1,1],
-				[0,1,1,0],
-				[0,0,1,1]
-			]);
-var start = graph.grid[0][0];
-var end = graph.grid[1][2];
-var result = astar.search(graph, start, end);	
-console.log(result)
-		</script>
+<body>
+	<header class="header" id="header">
 
-	</body>
+	</header>
+	<div class="area" id="area"></div>
+
+	<script src="./js/board.js"></script>
+	<script src="./js/astar.js"></script>
+
+	<script type='text/javascript'>
+		function toArray(obj) {
+			var array = [];
+			// iterate backwards ensuring that length is an UInt32
+			for (var i = obj.length >>> 0; i--;) {
+				array[i] = obj[i];
+			}
+			return array;
+		}
+		var graph = new Graph(board)
+		var start = graph.grid[startY][startX];
+		var end = graph.grid[endY][endX];
+		console.log(start)
+		console.log(end)
+		var result = astar.search(graph, start, end);
+		console.log(result)
+		for (let i = 0; i < result.length; i++) {
+			console.log(result[i].x, result[i].y)
+			document.querySelector(
+				`.row-${result[i].y} #block-${result[i].x}`
+			).style.backgroundColor = "red"
+		}
+	</script>
+
+</body>
+
 </html>
