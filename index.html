@@ -30,16 +30,22 @@
 			return array;
 		}
 		var graph = new Graph(board)
-		var start = graph.grid[startY][startX];
-		var end = graph.grid[endY][endX];
-		console.log(start)
+        console.log(endY)
+		var start = graph.grid[startX][startY];
+	    var end = graph.grid[endY][endX];
+        console.log(startY,startX)
+        console.log(endY,endX)
+        document.querySelector(`.row-${startY} .block-${startX}`).style.backgroundColor = "green"
+		document.querySelector(`.row-${endY} .block-${endX}`).style.backgroundColor = "green"
+        console.log(start)
 		console.log(end)
 		var result = astar.search(graph, start, end);
-		console.log(result)
+        console.log(endX);
+        console.log(result)
 		for (let i = 0; i < result.length; i++) {
 			console.log(result[i].x, result[i].y)
 			document.querySelector(
-				`.row-${result[i].y} #block-${result[i].x}`
+				`.row-${result[i].y} .block-${result[i].x}`
 			).style.backgroundColor = "red"
 		}
 	</script>

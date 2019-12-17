@@ -153,6 +153,7 @@ function Graph(gridIn, options) {
   this.nodes = [];
   this.diagonal = !!options.diagonal;
   this.grid = [];
+    console.log(gridIn)
   for (var x = 0; x < gridIn.length; x++) {
     this.grid[x] = [];
 

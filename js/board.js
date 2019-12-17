@@ -34,19 +34,19 @@ function renderArea() {
 			let block = document.createElement("div");
 			row.appendChild(block);
 			block.className = `block`;
-			block.id = `block-${b}`;
+			block.className += ` block-${b}`;
 			block.onclick = function() {
-				console.log(this.classList.contains("ending"))
 				if (
 					!this.classList.contains("ending") &&
 					!this.classList.contains("starting")
 				) {
-					if (this.className === "block wall") {
-						this.className = "block";
-					} else {
-						this.className += " wall";
-					}
-				}
+                    if (this.classList.contains("wall")) {
+                        this.classList.remove("wall");
+                    } 
+                    else {
+                        this.classList.add("wall");
+                    }
+                }
 			};
 		}
 		document.getElementById("area").appendChild(row);
@@ -58,11 +58,12 @@ function renderPoints() {
 		start: { x: Math.floor(width / 5), y: Math.floor(height / 2) },
 		end: { x: Math.floor(width / 1.3), y: Math.floor(height / 2) }
 	};
+    console.log(positions)
 
 	// start point
 
 	document.querySelector(
-		`.row-${positions.start.y} #block-${positions.start.x}`
+		`.row-${positions.start.y} .block-${positions.start.x}`
 	).innerHTML = `<svg enable-background="new 0 0 512 512" version="1.1" viewBox="0 0 512 512" xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
 		<path d="m206.45 115.4c-16.027-0.663-32.252-1.664-48.223-2.972-4.186-0.34-7.856 2.772-8.199 6.958-0.343 4.185 2.772 7.856 6.958 8.199 5.73 0.469 11.496 0.885 17.27 1.274v58.632c1e-3 4.199 3.406 7.604 7.605 7.604s7.604-3.405 7.604-7.604v-57.699c5.463 0.3 10.922 0.578 16.358 0.803 0.106 4e-3 0.213 6e-3 0.319 6e-3 4.054 0 7.422-3.201 7.592-7.29 0.173-4.194-3.088-7.737-7.284-7.911z"/>
 		<path d="m425.33 112.1c-0.564-4.162-4.397-7.082-8.556-6.515-15.905 2.154-32.073 4.013-48.055 5.522-4.18 0.395-7.249 4.105-6.855 8.285 0.372 3.938 3.684 6.889 7.561 6.889 0.239 0 0.482-0.011 0.725-0.034 5.279-0.499 10.579-1.048 15.881-1.621v57.261c-1e-3 4.2 3.403 7.605 7.603 7.605s7.604-3.405 7.604-7.604v-59c5.877-0.709 11.747-1.444 17.576-2.234 4.162-0.563 7.079-4.393 6.516-8.554z"/>
@@ -74,27 +75,29 @@ function renderPoints() {
 		`;
 
 	document.querySelector(
-		`.row-${positions.start.y} #block-${positions.start.x}`
+		`.row-${positions.start.y} .block-${positions.start.x}`
 	).classList += " starting";
 
 	document.querySelector(
-		`.row-${positions.start.y} #block-${positions.start.x}`
-	).id = "starting";
+		`.row-${positions.start.y} .block-${positions.start.x}`
+	).id += " starting";
+
+
 
 	startY = positions.start.y
-	startX = positions.start.y
+	startX = positions.start.x
 
 	//end point
 
 	document.querySelector(
-		`.row-${positions.end.y} #block-${positions.end.x}`
+		`.row-${positions.end.y} .block-${positions.end.x}`
 	).innerHTML = `<svg enable-background="new 0 0 357 357" version="1.1" viewBox="0 0 357 357" xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
 		<polygon points="357 35.7 321.3 0 178.5 142.8 35.7 0 0 35.7 142.8 178.5 0 321.3 35.7 357 178.5 214.2 321.3 357 357 321.3 214.2 178.5"/>
 		</svg>
 		`;
 
 	document.querySelector(
-		`.row-${positions.end.y} #block-${positions.end.x}`
+		`.row-${positions.end.y} .block-${positions.end.x}`
 	).classList += " ending";
 	console.log(positions.end)
 	endY = positions.end.y
@@ -122,10 +125,11 @@ $(".block").on("mousedown mouseup", function mouseState(e) {
 				(mousedown && !this.classList.contains("ending")) ||
 				!this.classList.contains("starting")
 			) {
-				if (this.className === "block wall") {
-					this.className = "block";
-				} else if (this.className === "block") {
-					this.className = "block wall";
+				if (this.classList.contains("wall")) {
+                    this.classList.remove("wall");
+				} 
+                else {
+					this.classList.add("wall");
 				}
 			}
 		});
