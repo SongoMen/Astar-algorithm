@@ -37,12 +37,9 @@ function visualizeScan(i,y,x,delay,done1){
         },delay)
         nodesNum++;
     }
-    console.log(done1)
   if(done1){
-      console.log(nodesNum)
     setTimeout(() => {
       done = true
-        console.log("x")
     },1.1*nodesNum)
   }
 }
@@ -55,6 +52,7 @@ var astar = {
   * @param {GridNode} end
   */
   search: function(graph, start, end, options) {
+    nodesNum = 0;
     graph.cleanDirty();
     options = options || {};
     var heuristic = options.heuristic || astar.heuristics.manhattan;
@@ -85,7 +83,6 @@ var astar = {
       var neighbors = graph.neighbors(currentNode);
       for (var i = 0, il = neighbors.length; i < il ; ++i) {
 		delay+=1
-		console.log("delay",delay)
         var neighbor = neighbors[i];
         visualizeScan(i,neighbor.y,neighbor.x,delay, 0)
         if (neighbor.closed || neighbor.isWall()) {
@@ -132,6 +129,7 @@ var astar = {
     }
 
     // No result was found - empty array signifies failure to find path.
+	visualizeScan("","","",0, 1)
     return [];
   },
   // See list of heuristics: http://theory.stanford.edu/~amitp/GameProgramming/Heuristics.html

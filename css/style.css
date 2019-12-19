@@ -61,6 +61,7 @@ html,body{
 	display: flex
 }
 .block{
+    padding: 2px;
     border-radius: 5px;
     margin: 2px;
 	width: 25px;
