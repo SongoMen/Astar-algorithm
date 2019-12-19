@@ -19,10 +19,10 @@ function renderArea() {
 			html.offsetHeight
 		) -
 			headerHeight) /
-		26
+		29
 	);
 
-	width = Math.floor(document.body.clientWidth / 25);
+	width = Math.floor(document.body.clientWidth / 29);
 
 	// GENERATE GRID IN 2D ARRAY
 
