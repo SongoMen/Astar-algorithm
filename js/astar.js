@@ -1,18 +1,4 @@
-let done = {
-  aInternal: 10,
-  aListener: function(val) {},
-  set a(val) {
-    this.aInternal = val;
-    this.aListener(val);
-  },
-  get a() {
-    return this.aInternal;
-  },
-  registerListener: function(listener) {
-    this.aListener = listener;
-  }
-};
-done.a = false;
+let done = false;
 (function(definition) {
   /* global module, define */
   if (typeof module === 'object' && typeof module.exports === 'object') {
@@ -42,29 +28,31 @@ function getHeap() {
   });
 }
 
+let nodesNum = 0
+
 function visualizeScan(i,y,x,delay,done1){
 	if(i!== "" && y !== "" && x !== "" && delay !== ""){
-  setTimeout(() => {
-  document.querySelector(`.row-${y} .block-${x}`).classList.add("visited")
-  },delay)
-	}
+        setTimeout(() => {
+            document.querySelector(`.row-${y} .block-${x}`).classList.add("visited")
+        },delay)
+        nodesNum++;
+    }
+    console.log(done1)
   if(done1){
-	getRoad();
+      console.log(nodesNum)
+    setTimeout(() => {
+      done = true
+        console.log("x")
+    },1.1*nodesNum)
   }
 }
 
 
 var astar = {
   /**
-  * Perform an A* Search on a graph given a start and end node.
   * @param {Graph} graph
   * @param {GridNode} start
   * @param {GridNode} end
-  * @param {Object} [options]
-  * @param {bool} [options.closest] Specifies whether to return the
-             path to the closest node if the target is unreachable.
-  * @param {Function} [options.heuristic] Heuristic function (see
-  *          astar.heuristics).
   */
   search: function(graph, start, end, options) {
     graph.cleanDirty();
@@ -86,6 +74,7 @@ var astar = {
 
       // End case -- result has been found, return the traced path.
       if (currentNode === end) {
+		visualizeScan("","","",0, 1)
         return pathTo(currentNode);
       }
 
@@ -99,7 +88,6 @@ var astar = {
 		console.log("delay",delay)
         var neighbor = neighbors[i];
         visualizeScan(i,neighbor.y,neighbor.x,delay, 0)
-		
         if (neighbor.closed || neighbor.isWall()) {
           // Not a valid node to process, skip to next neighbor.
           continue;
@@ -136,12 +124,11 @@ var astar = {
           }
         }
       }
-		visualizeScan("","","",0, 1)
     }
 
     if (closest) {
-	visualizeScan("","","",0, 1)
-	 return pathTo(closestNode);
+		visualizeScan("","","",0, 1)
+        return pathTo(closestNode);
     }
 
     // No result was found - empty array signifies failure to find path.
