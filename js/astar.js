@@ -40,7 +40,7 @@ function visualizeScan(i,y,x,delay,done1){
   if(done1){
     setTimeout(() => {
       done = true
-    },1.1*nodesNum)
+    },.8*nodesNum)
   }
 }
 
@@ -82,7 +82,7 @@ var astar = {
       // Find all neighbors for the current node.
       var neighbors = graph.neighbors(currentNode);
       for (var i = 0, il = neighbors.length; i < il ; ++i) {
-		delay+=1
+		delay+=.7
         var neighbor = neighbors[i];
         visualizeScan(i,neighbor.y,neighbor.x,delay, 0)
         if (neighbor.closed || neighbor.isWall()) {
