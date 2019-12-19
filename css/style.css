@@ -61,7 +61,6 @@ html,body{
 	display: flex
 }
 .block{
-    padding: 2px;
     border-radius: 5px;
     margin: 1px;
 	width: 25px;
@@ -84,4 +83,9 @@ html,body{
 .visited{
 	background-color: #ccccff ;
 	animation: visitedShow .3s;
+}
+.desc{
+    display: flex;
+    justify-content: center;
+    align-items: center
 }
