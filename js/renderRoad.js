@@ -12,7 +12,6 @@ function search() {
 
         var result = astar.search(graph, start, end);
 
-        document.getElementById("allBlocks").innerHTML = result.length
         let check = () => setInterval(()=>{
             if(done){
                 getRoad(result)
@@ -25,12 +24,13 @@ function search() {
 }
 
 function getRoad(result){
-    for (let i = 0; i < result.length; i++) {
+    for (let i = 0; i < result.length + 1; i++) {
         setTimeout(() => {
             document.querySelector(`.row-${result[i].y} .block-${result[i].x}`).classList.remove("visited")
             document.querySelector(`.row-${result[i].y} .block-${result[i].x}`).classList.add("road")
-        }, 30 * i);
+        }, 20 * i);
     }
+    document.getElementById("allBlocks").innerHTML = result.length
     setTimeout(() => {
         doing = false
     }, 50 * result.length);
