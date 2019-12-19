@@ -13,7 +13,8 @@
 
 <body>
 	<header class="header" id="header">
-
+		<button onClick="search()"></button>
+		<p style="color: white" id="allBlocks"></p>
 	</header>
 	<div class="area" id="area"></div>
 
@@ -21,32 +22,36 @@
 	<script src="./js/astar.js"></script>
 
 	<script type='text/javascript'>
-		function toArray(obj) {
-			var array = [];
-			// iterate backwards ensuring that length is an UInt32
-			for (var i = obj.length >>> 0; i--;) {
-				array[i] = obj[i];
-			}
-			return array;
-		}
 		var graph = new Graph(board)
-        console.log(endY)
-		var start = graph.grid[startX][startY];
-	    var end = graph.grid[endY][endX];
-        console.log(startY,startX)
-        console.log(endY,endX)
-        document.querySelector(`.row-${startY} .block-${startX}`).style.backgroundColor = "green"
-		document.querySelector(`.row-${endY} .block-${endX}`).style.backgroundColor = "green"
-        console.log(start)
-		console.log(end)
-		var result = astar.search(graph, start, end);
-        console.log(endX);
-        console.log(result)
-		for (let i = 0; i < result.length; i++) {
-			console.log(result[i].x, result[i].y)
-			document.querySelector(
-				`.row-${result[i].y} .block-${result[i].x}`
-			).style.backgroundColor = "red"
+		let doing = false;
+		function search() {
+			if (!doing) {
+				doing = true
+				$('.block').removeClass("road");
+				$('.block').removeClass("visited");
+				var graph = new Graph(board)
+
+				var start = graph.grid[startX][startY];
+				var end = graph.grid[endX][endY];
+
+				var result = astar.search(graph, start, end);
+
+				document.getElementById("allBlocks").innerHTML = result.length
+				setInterval(()=>{
+				console.log(done.a)
+				},100)
+			}
+		}
+		function getRoad(){
+							for (let i = 0; i < result.length; i++) {
+						setTimeout(() => {
+							document.querySelector(`.row-${result[i].y} .block-${result[i].x}`).classList.remove("visited")
+							document.querySelector(`.row-${result[i].y} .block-${result[i].x}`).classList.add("road")
+						}, 30 * i);
+					}
+					setTimeout(() => {
+						doing = false
+					}, 50 * result.length);
 		}
 	</script>
 

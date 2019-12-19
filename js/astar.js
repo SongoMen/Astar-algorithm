@@ -1,3 +1,18 @@
+let done = {
+  aInternal: 10,
+  aListener: function(val) {},
+  set a(val) {
+    this.aInternal = val;
+    this.aListener(val);
+  },
+  get a() {
+    return this.aInternal;
+  },
+  registerListener: function(listener) {
+    this.aListener = listener;
+  }
+};
+done.a = false;
 (function(definition) {
   /* global module, define */
   if (typeof module === 'object' && typeof module.exports === 'object') {
@@ -27,6 +42,18 @@ function getHeap() {
   });
 }
 
+function visualizeScan(i,y,x,delay,done1){
+	if(i!== "" && y !== "" && x !== "" && delay !== ""){
+  setTimeout(() => {
+  document.querySelector(`.row-${y} .block-${x}`).classList.add("visited")
+  },delay)
+	}
+  if(done1){
+	getRoad();
+  }
+}
+
+
 var astar = {
   /**
   * Perform an A* Search on a graph given a start and end node.
@@ -44,7 +71,6 @@ var astar = {
     options = options || {};
     var heuristic = options.heuristic || astar.heuristics.manhattan;
     var closest = options.closest || false;
-
     var openHeap = getHeap();
     var closestNode = start; // set the start node to be the closest if required
 
@@ -52,7 +78,7 @@ var astar = {
     graph.markDirty(start);
 
     openHeap.push(start);
-
+	let delay = 0
     while (openHeap.size() > 0) {
 
       // Grab the lowest f(x) to process next.  Heap keeps this sorted for us.
@@ -68,10 +94,12 @@ var astar = {
 
       // Find all neighbors for the current node.
       var neighbors = graph.neighbors(currentNode);
-
-      for (var i = 0, il = neighbors.length; i < il; ++i) {
+      for (var i = 0, il = neighbors.length; i < il ; ++i) {
+		delay+=1
+		console.log("delay",delay)
         var neighbor = neighbors[i];
-
+        visualizeScan(i,neighbor.y,neighbor.x,delay, 0)
+		
         if (neighbor.closed || neighbor.isWall()) {
           // Not a valid node to process, skip to next neighbor.
           continue;
@@ -81,7 +109,6 @@ var astar = {
         // We need to check if the path we have arrived at this neighbor is the shortest one we have seen yet.
         var gScore = currentNode.g + neighbor.getCost(currentNode);
         var beenVisited = neighbor.visited;
-
         if (!beenVisited || gScore < neighbor.g) {
 
           // Found an optimal (so far) path to this node.  Take score for node to see how good it is.
@@ -97,6 +124,7 @@ var astar = {
             if (neighbor.h < closestNode.h || (neighbor.h === closestNode.h && neighbor.g < closestNode.g)) {
               closestNode = neighbor;
             }
+
           }
 
           if (!beenVisited) {
@@ -108,10 +136,12 @@ var astar = {
           }
         }
       }
+		visualizeScan("","","",0, 1)
     }
 
     if (closest) {
-      return pathTo(closestNode);
+	visualizeScan("","","",0, 1)
+	 return pathTo(closestNode);
     }
 
     // No result was found - empty array signifies failure to find path.

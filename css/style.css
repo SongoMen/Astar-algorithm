@@ -16,6 +16,30 @@ html,body{
 		transform: scale(1);
 	}
 }
+
+@keyframes roadShow{
+	0%{
+		background-color: white;
+		transform: scale(0);
+	}
+	100%{
+		background-color: #bcdebb ;
+		transform: scale(1);
+	}
+}
+
+@keyframes visitedShow{
+	0%{
+		background-color: white;
+		transform: scale(0);
+	}
+	100%{
+		background-color: #ccccff;
+		transform: scale(1);
+	}
+}
+
+
 .header{
 	width: 100%;
 	height: 10%;
@@ -40,7 +64,18 @@ html,body{
 	touch-action: none
 }
 .wall{
-	background-color: black;
-	border: 1px solid black;
-	animation: wallShow .3s
+	background-color: black!important;
+	border: 1px solid black!important;
+	animation: wallShow .3s!important
+}
+
+.road{
+	background-color: #bcdebb ;
+	animation: roadShow .3s;
+}
+
+
+.visited{
+	background-color: #ccccff ;
+	animation: visitedShow .3s;
 }

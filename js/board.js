@@ -24,29 +24,41 @@ function renderArea() {
 
 	width = Math.floor(document.body.clientWidth / 25);
 
+	// GENERATE GRID IN 2D ARRAY
+
+	for (let i = 0; i < width; i++) {
+		board[i] = []
+		for (let b = 0; b < height; b++) {
+			board[i].push(1)
+		}
+	}
+
+
 	for (let i = 0; i < height; i++) {
 		let row = document.createElement("div");
 		row.className = `row-${i} row`;
-		board.push(1)
-		board[i] = []
 		for (let b = 0; b < width; b++) {
-			board[i].push(1)
 			let block = document.createElement("div");
 			row.appendChild(block);
 			block.className = `block`;
 			block.className += ` block-${b}`;
-			block.onclick = function() {
+			block.onclick = function () {
+				let row = $(this).parent()[0].classList.value.split("-")[1].split(" ")[0]
+				let col = this.classList.value.split("-")[1].split(" ")[0]
 				if (
 					!this.classList.contains("ending") &&
 					!this.classList.contains("starting")
 				) {
-                    if (this.classList.contains("wall")) {
-                        this.classList.remove("wall");
-                    } 
-                    else {
-                        this.classList.add("wall");
-                    }
-                }
+					if (this.classList.contains("wall")) {
+						this.classList.remove("wall");
+
+						board[col][row] = 1
+					}
+					else {
+						this.classList.add("wall");
+						board[col][row] = 0
+					}
+				}
 			};
 		}
 		document.getElementById("area").appendChild(row);
@@ -58,7 +70,6 @@ function renderPoints() {
 		start: { x: Math.floor(width / 5), y: Math.floor(height / 2) },
 		end: { x: Math.floor(width / 1.3), y: Math.floor(height / 2) }
 	};
-    console.log(positions)
 
 	// start point
 
@@ -82,8 +93,6 @@ function renderPoints() {
 		`.row-${positions.start.y} .block-${positions.start.x}`
 	).id += " starting";
 
-
-
 	startY = positions.start.y
 	startX = positions.start.x
 
@@ -99,7 +108,7 @@ function renderPoints() {
 	document.querySelector(
 		`.row-${positions.end.y} .block-${positions.end.x}`
 	).classList += " ending";
-	console.log(positions.end)
+
 	endY = positions.end.y
 	endX = positions.end.x
 
@@ -111,29 +120,33 @@ renderPoints();
 //build walls on hold mouse button
 
 mousedown = false;
-document.body.onmousedown = function() {
+document.body.onmousedown = function () {
 	mousedown = true;
 };
-document.body.onmouseup = function() {
+document.body.onmouseup = function () {
 	mousedown = false;
 };
 
 $(".block").on("mousedown mouseup", function mouseState(e) {
 	if (e.type == "mousedown") {
-		$(document).on("mouseover", ".block", function(e) {
+		$(document).on("mouseover", ".block", function (e) {
+			let row = $(this).parent()[0].classList.value.split("-")[1].split(" ")[0]
+			let col = this.classList.value.split("-")[1].split(" ")[0]
 			if (
-				(mousedown && !this.classList.contains("ending")) ||
+				mousedown && !this.classList.contains("ending") &&
 				!this.classList.contains("starting")
 			) {
 				if (this.classList.contains("wall")) {
-                    this.classList.remove("wall");
-				} 
-                else {
+					this.classList.remove("wall");
+					board[col][row] = 1
+				}
+				else {
+					board[col][row] = 0
 					this.classList.add("wall");
 				}
 			}
 		});
 	} else {
-		$(document).off("mouseover");
+		$(document).off("mousedown mouseup");
 	}
 });
