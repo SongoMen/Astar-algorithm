@@ -2,9 +2,10 @@ var graph = new Graph(board)
 let doing = false;
 function search() {
     if (!doing) {
+        document.getElementById("btn").innerHTML = "Loading...";
         doing = true
-        $('.block').removeClass("road");
-        $('.block').removeClass("visited");
+        $('.area .block').removeClass("road");
+        $('.area .block').removeClass("visited");
         var graph = new Graph(board)
 
         var start = graph.grid[startX][startY];
@@ -15,7 +16,6 @@ function search() {
         check = setInterval(checkAstar,100)
         
         function checkAstar(){
-           console.log("XXXX")
             if(done){
                 getRoad(result)
             }
@@ -28,13 +28,13 @@ function search() {
                     document.querySelector(`.row-${result[i].y} .block-${result[i].x}`).classList.add("road")
                 }, 20 * i);
             }
-            document.getElementById("allBlocks").innerHTML = result.length
+            document.getElementById("allBlocks").innerHTML = "Distance in blocks: " + result.length
             setTimeout(() => {
                 doing = false
-            }, 50 * result.length);
+                document.getElementById("btn").innerHTML = "Visualize";
+            }, 20 * result.length);
             done = false
             clearInterval(check)
-
         }
     }
 }
