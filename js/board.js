@@ -6,7 +6,9 @@ let endY;
 let endX;
 
 function renderArea() {
-	let headerHeight = document.getElementById("header").clientHeight,
+    document.getElementById('area').innerHTML = ""
+    board = []
+    let headerHeight = document.getElementById("header").clientHeight,
 		body = document.body,
 		html = document.documentElement;
 
@@ -63,6 +65,7 @@ function renderArea() {
 		}
 		document.getElementById("area").appendChild(row);
 	}
+    renderPoints();
 }
 
 function renderPoints() {
@@ -104,7 +107,6 @@ function renderPoints() {
 }
 
 renderArea();
-renderPoints();
 
 //build walls on hold mouse button
 
