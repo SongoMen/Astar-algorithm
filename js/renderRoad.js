@@ -1,5 +1,10 @@
 var graph = new Graph(board)
 let doing = false;
+
+/*
+ * handles starting algorithm and other staff like cleaning grid or changing button text
+ */
+
 function search() {
     if (!doing) {
         document.getElementById("btn").innerHTML = "Loading...";
@@ -20,6 +25,10 @@ function search() {
                 getRoad(result)
             }
         }
+
+        /*
+         * adds classes to road and visited blocks, changes distance and button text, clears interval 
+         */
 
         function getRoad(result){
             for (let i = 0; i < result.length; i++) {

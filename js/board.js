@@ -5,6 +5,10 @@ let startX;
 let endY;
 let endX;
 
+/*
+ * creates 2D array that represents grid for algorithm and renders block on page
+ */
+
 function renderArea() {
     document.getElementById('area').innerHTML = ""
     board = []
@@ -68,6 +72,10 @@ function renderArea() {
     renderPoints();
 }
 
+/*
+ * generates points on grid  
+ */
+
 function renderPoints() {
 	const positions = {
 		start: { x: Math.floor(width / 5), y: Math.floor(height / 2) },
@@ -108,7 +116,10 @@ function renderPoints() {
 
 renderArea();
 
-//build walls on hold mouse button
+/*
+ * build walls on hold mouse button
+ */
+
 
 mousedown = false;
 document.body.onmousedown = function () {
