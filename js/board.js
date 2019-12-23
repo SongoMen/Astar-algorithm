@@ -86,7 +86,7 @@ function renderPoints() {
 
 	document.querySelector(
 		`.row-${positions.start.y} .block-${positions.start.x}`
-	).innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-play"><polygon points="5 3 19 12 5 21 5 3"/></svg>`;
+	).innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="startingsvg"><polygon points="5 3 19 12 5 21 5 3"/></svg>`;
 
 	document.querySelector(
 		`.row-${positions.start.y} .block-${positions.start.x}`
@@ -94,7 +94,7 @@ function renderPoints() {
 
 	document.querySelector(
 		`.row-${positions.start.y} .block-${positions.start.x}`
-	).id += " starting";
+	).id += "starting";
 
 	startY = positions.start.y
 	startX = positions.start.x
@@ -103,7 +103,7 @@ function renderPoints() {
 
 	document.querySelector(
 		`.row-${positions.end.y} .block-${positions.end.x}`
-	).innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 20.9l4.95-4.95a7 7 0 1 0-9.9 0L12 20.9zm0 2.828l-6.364-6.364a9 9 0 1 1 12.728 0L12 23.728zM12 13a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm0 2a4 4 0 1 1 0-8 4 4 0 0 1 0 8z"/></svg>`;
+	).innerHTML = `<svg class="endingsvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 20.9l4.95-4.95a7 7 0 1 0-9.9 0L12 20.9zm0 2.828l-6.364-6.364a9 9 0 1 1 12.728 0L12 23.728zM12 13a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm0 2a4 4 0 1 1 0-8 4 4 0 0 1 0 8z"/></svg>`;
 
 	document.querySelector(
 		`.row-${positions.end.y} .block-${positions.end.x}`
