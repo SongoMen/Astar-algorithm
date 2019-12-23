@@ -150,8 +150,12 @@ $(".block").on("mousedown mouseup", function mouseState(e) {
 					this.classList.add("wall");
 				}
 			}
+            else{
+		        $(document).off("mousedown mouseup");
+            }
 		});
 	} else {
+        console.log("x")
 		$(document).off("mousedown mouseup");
 	}
 });
