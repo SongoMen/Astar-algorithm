@@ -3,40 +3,16 @@ let moveEnd = false;
 
 $(".starting").on("mousedown mouseup", function mouseState(e) {
   if (e.type == "mousedown") {
-    $(document).on("mouseover", ".block", function(e) {
-      console.log(this);
-      let row = $(this)
-        .parent()[0]
-        .classList.value.split("-")[1]
-        .split(" ")[0];
-      let col = this.classList.value.split("-")[1].split(" ")[0];
-      if (
-        mousedown &&
-        !this.classList.contains("ending") &&
-        !this.classList.contains("starting")
-      ) {
-        if (this.classList.contains("wall")) {
-          this.classList.remove("wall");
-          board[col][row] = 1;
-        } else {
-          board[col][row] = 0;
-          this.classList.add("wall");
-        }
-      }
+    let mydiv1 = document.querySelector(".startingsvg");
+    $(".startingsvg").on("mousemove", function(e) {
+      let x = e.pageX;
+      let y = e.pageY;
+      mydiv1.style.top = y - 15 + "px";
+      mydiv1.style.left = x - 10 + "px";
     });
   } else {
-    $(document).off("mousedown mouseup");
+    console.log("x");
+    $(".starting").off("mousedown mouseup");
+    $(".startingsvg").off("mousemove");
   }
 });
-
-document.addEventListener(
-  "mousemove",
-  function(ev) {
-      console.log(ev)
-    document.querySelector(".startingsvg").style.transform =
-      "translateY(" + (ev.clientY - 80) + "px)";
-    document.querySelector(".startingsvg").style.transform +=
-      "translateX(" + (ev.clientX - 100) + "px)";
-  },
-  false,
-);

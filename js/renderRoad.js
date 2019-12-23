@@ -1,5 +1,4 @@
 var graph = new Graph(board)
-let doing = false;
 
 /*
  * handles starting algorithm and other staff like cleaning grid or changing button text

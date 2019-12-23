@@ -1,5 +1,6 @@
 let width, height;
-let board = []
+let doing = false;
+let board = [];
 let startY;
 let startX;
 let endY;
@@ -10,6 +11,7 @@ let endX;
  */
 
 function renderArea() {
+    if(!doing){
     document.getElementById('area').innerHTML = ""
     board = []
     let headerHeight = document.getElementById("header").clientHeight,
@@ -70,6 +72,7 @@ function renderArea() {
 		document.getElementById("area").appendChild(row);
 	}
     renderPoints();
+    }
 }
 
 /*
