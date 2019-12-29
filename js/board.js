@@ -152,6 +152,6 @@ $(".block").on("mousedown mouseup", function mouseState(e) {
 			}
 		});
 	} else {
-		$(document).off("mousedown mouseup");
+		$(document).off("mouseover");
 	}
 });
