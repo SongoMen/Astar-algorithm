@@ -104,6 +104,7 @@ h4{
     align-items: center
 }
 .flex h4{
+    font-size: 1em;
     margin-right: 25px
 }
 .btn{
