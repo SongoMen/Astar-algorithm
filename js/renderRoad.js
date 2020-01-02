@@ -11,7 +11,7 @@ function search() {
         $('.area .block').removeClass("road");
         $('.area .block').removeClass("visited");
         var graph = new Graph(board)
-
+	
         var start = graph.grid[startX][startY];
         var end = graph.grid[endX][endY];
 

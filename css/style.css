@@ -82,6 +82,7 @@ h4{
 	border: 1px solid #4287f5;
 	touch-action: none
 }
+
 .wall{
 	background-color: black!important;
 	border: 1px solid black!important;
@@ -123,6 +124,23 @@ h4{
 }
 .reset{
     background-color: #ff0d0d
+}
+.row-0 .block{
+	border-top-left-radius: 0;
+	border-top-right-radius: 0
+}
+
+.row .block:last-child{
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0
+}
+
+.row-0 .block:last-child{
+	border-bottom-right-radius: 0;
+}
+.block-0{
+	border-bottom-left-radius: 0;
+	border-top-left-radius: 0;
 }
 .startingsvg{
     width: 25px;
