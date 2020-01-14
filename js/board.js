@@ -91,7 +91,7 @@ function renderPoints() {
     end: { x: Math.floor(width / 1.3), y: Math.floor(height / 2) }
   };
 
-  // start point
+  // starting point
 
   document.querySelector(
     `.row-${positions.start.y} .block-${positions.start.x}`
@@ -108,7 +108,7 @@ function renderPoints() {
   startY = positions.start.y;
   startX = positions.start.x;
 
-  //end point
+  //ending point
 
   document.querySelector(
     `.row-${positions.end.y} .block-${positions.end.x}`
