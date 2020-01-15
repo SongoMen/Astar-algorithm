@@ -3,9 +3,7 @@ const remove = el => el.parentElement.removeChild(el);
 function moveHandler(svgClass, blockClass) {
   $("." + svgClass).on("mousedown mouseup", function mouseState(e) {
     let elY, elX;
-    console.log(e.type);
     if (e.type == "mousedown") {
-      console.log("x2");
       let icon = document.querySelector("." + svgClass);
       $(".area").on("mousemove", function(e) {
         let x = e.pageX;
@@ -40,11 +38,9 @@ function moveHandler(svgClass, blockClass) {
         if (typeof elY !== "undefined" && typeof elX !== "undefined") {
           let targetBlock = document.querySelector(`.row-${elY} .block-${elX}`);
           if (!targetBlock.classList.contains("ending")) {
-            console.log(svgClass);
             console.log(document.querySelector("." + svgClass));
             remove(icon);
             $(".block").removeClass(blockClass);
-
             targetBlock.classList.add(blockClass);
             if (blockClass === "starting") {
               targetBlock.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class=${svgClass}><polygon points="5 3 19 12 5 21 5 3"/></svg>`;
@@ -56,7 +52,6 @@ function moveHandler(svgClass, blockClass) {
         }
       });
     } else {
-      console.log("x");
       $(".area").off("mousemove");
     }
   });
