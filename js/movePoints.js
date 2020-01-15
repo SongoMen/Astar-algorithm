@@ -36,10 +36,11 @@ function moveHandler(svgClass, blockClass) {
           stack[i].style.pointerEvents = "";
         }
         if (typeof elY !== "undefined" && typeof elX !== "undefined") {
+             
+            console.log(icon.parentElement);
+        remove(icon);
           let targetBlock = document.querySelector(`.row-${elY} .block-${elX}`);
           if (!targetBlock.classList.contains("ending")) {
-            console.log(document.querySelector("." + svgClass));
-            remove(icon);
             $(".block").removeClass(blockClass);
             targetBlock.classList.add(blockClass);
             if (blockClass === "starting") {
