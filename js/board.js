@@ -25,10 +25,10 @@ function renderArea() {
         body.offsetHeight,
         html.clientHeight,
         html.scrollHeight,
-        html.offsetHeight
+        html.offsetHeight,
       ) -
         headerHeight) /
-        27
+        27,
     );
 
     width = Math.floor(document.body.clientWidth / 27);
@@ -87,22 +87,22 @@ function renderArea() {
 
 function renderPoints() {
   const positions = {
-    start: { x: Math.floor(width / 5), y: Math.floor(height / 2) },
-    end: { x: Math.floor(width / 1.3), y: Math.floor(height / 2) }
+    start: {x: Math.floor(width / 5), y: Math.floor(height / 2)},
+    end: {x: Math.floor(width / 1.3), y: Math.floor(height / 2)},
   };
 
   // starting point
 
   document.querySelector(
-    `.row-${positions.start.y} .block-${positions.start.x}`
+    `.row-${positions.start.y} .block-${positions.start.x}`,
   ).innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="startingsvg"><polygon points="5 3 19 12 5 21 5 3"/></svg>`;
 
   document.querySelector(
-    `.row-${positions.start.y} .block-${positions.start.x}`
+    `.row-${positions.start.y} .block-${positions.start.x}`,
   ).classList += " starting";
 
   document.querySelector(
-    `.row-${positions.start.y} .block-${positions.start.x}`
+    `.row-${positions.start.y} .block-${positions.start.x}`,
   ).id += "starting";
 
   startY = positions.start.y;
@@ -111,11 +111,11 @@ function renderPoints() {
   //ending point
 
   document.querySelector(
-    `.row-${positions.end.y} .block-${positions.end.x}`
+    `.row-${positions.end.y} .block-${positions.end.x}`,
   ).innerHTML = `<svg class="endingsvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 20.9l4.95-4.95a7 7 0 1 0-9.9 0L12 20.9zm0 2.828l-6.364-6.364a9 9 0 1 1 12.728 0L12 23.728zM12 13a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm0 2a4 4 0 1 1 0-8 4 4 0 0 1 0 8z"/></svg>`;
 
   document.querySelector(
-    `.row-${positions.end.y} .block-${positions.end.x}`
+    `.row-${positions.end.y} .block-${positions.end.x}`,
   ).classList += " ending";
 
   endY = positions.end.y;

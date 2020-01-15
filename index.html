@@ -1,45 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Pathfinding</title>
+    <link rel="stylesheet" href="./css/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat:500,700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  </head>
 
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Pathfinding</title>
-	<link rel="stylesheet" href="./css/style.css">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:500,700&display=swap" rel="stylesheet">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-</head>
-
-<body>
-	<header class="header" id="header">
+  <body>
+    <header class="header" id="header">
+      <div class="flex">
+        <h3>Legend:&nbsp;&nbsp;&nbsp;</h3>
         <div class="flex">
-            <h3>Legend:&nbsp;&nbsp;&nbsp;</h3>
-            <div class="flex">
-                <div class="block wall"></div>
-                <h4>&nbsp; - Wall block</h4>
-            </div>
-            <div class="flex">
-                <div class="block visited"></div>
-                <h4>&nbsp; - Visited block by algorithm</h4>
-            </div>
-            <div class="flex">
-                <div class="block road"></div>
-                <h4>&nbsp; - Road block</h4>
-            </div>
+          <div class="block wall"></div>
+          <h4>&nbsp; - Wall block</h4>
         </div>
-        <button class="btn" id="btn" onClick="search()">Visualize</button>
-        <button class="btn reset" onClick="renderArea()">RESET</button>
-		
-        <p id="allBlocks">Distance in blocks: </p>
-	</header>
-	<div class="area" id="area"></div>
+        <div class="flex">
+          <div class="block visited"></div>
+          <h4>&nbsp; - Visited block by algorithm</h4>
+        </div>
+        <div class="flex">
+          <div class="block road"></div>
+          <h4>&nbsp; - Road block</h4>
+        </div>
+      </div>
+      <button class="btn" id="btn" onClick="search()">Visualize</button>
+      <button class="btn reset" onClick="renderArea()">RESET</button>
 
+      <p id="allBlocks">Distance in blocks:</p>
+    </header>
+    <div class="area" id="area"></div>
 
-	<script src="./js/board.js"></script>
-	<script src="./js/astar.js"></script>
-	<script src="./js/renderRoad.js"></script>
-	<script src="./js/movePoints.js"></script>
-</body>
-
+    <script src="./js/board.js"></script>
+    <script src="./js/astar.js"></script>
+    <script src="./js/renderRoad.js"></script>
+    <script src="./js/movePoints.js"></script>
+  </body>
 </html>
