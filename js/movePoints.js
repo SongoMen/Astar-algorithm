@@ -1,66 +1,87 @@
+let moving;
+
+document.body.onmousedown = function(x) {
+  let target = x.path[0];
+  if (
+    !target.classList.contains("block") &&
+    !target.classList.contains("row") &&
+    target.classList.value !== "" &&
+    !target.tagName !== "SPAN"
+  ) {
+    moving = true;
+  } else mousedown = true;
+};
+document.body.onmouseup = function() {
+  moving = false;
+  mousedown = false;
+};
+
 const remove = el => el.parentElement.removeChild(el);
 
-function moveHandler(svgClass, blockClass) {
-  $(svgClass).on("mousedown mouseup", function mouseState(e) {
+function movePoints(svgClass, blockClass) {
+  console.log(arguments)
+  $(svgClass).on("mousedown", function mouseState(e) {
     let elY, elX;
-    console.log(e.type);
     if (e.type == "mousedown") {
-      console.log("x2");
-      let mydiv1 = document.querySelector(svgClass);
-      $(".area").on("mousemove", function(e) {
-        let x = e.pageX;
-        let y = e.pageY;
-        let counter = 0;
-        let stack = [];
-        let elementMouseIsOver = document.elementFromPoint(x, y);
+      console.log(this);
+      $(".block").on("mousemove", function(e) {
+        if (moving && !doing) {
+          doing = true;
+          let x = e.pageX;
+          let y = e.pageY;
+          let counter = 0;
+          let stack = [];
+          let elementMouseIsOver = document.elementFromPoint(x, y);
 
-        while (counter < 1) {
-          stack.push(elementMouseIsOver);
-          elementMouseIsOver.style.pointerEvents = "none";
-          elementMouseIsOver = document.elementFromPoint(x, y);
-          if (elementMouseIsOver.classList.contains("row")) {
-            elY = elementMouseIsOver.classList.value
-              .split("-")[1]
-              .split(" ")[0];
+          while (counter < 1) {
+            stack.push(elementMouseIsOver);
+            elementMouseIsOver.style.pointerEvents = "none";
+            elementMouseIsOver = document.elementFromPoint(x, y);
+            if (elementMouseIsOver.classList.contains("row")) {
+              elY = elementMouseIsOver.classList.value
+                .split("-")[1]
+                .split(" ")[0];
+            }
+            if (elementMouseIsOver.classList.contains("block")) {
+              elX = elementMouseIsOver.classList.value
+                .split("-")[1]
+                .split(" ")[0];
+            }
+            counter++;
           }
-          if (elementMouseIsOver.classList.contains("block")) {
-            elX = elementMouseIsOver.classList.value
-              .split("-")[1]
-              .split(" ")[0];
+
+          var i = 0,
+            il = counter;
+
+          for (; i < il; i += 1) {
+            stack[i].style.pointerEvents = "";
           }
-          counter++;
-        }
-
-        var i = 0,
-          il = counter;
-
-        for (; i < il; i += 1) {
-          stack[i].style.pointerEvents = "";
-        }
-        if (typeof elY !== "undefined" && typeof elX !== "undefined") {
-          let targetBlock = document.querySelector(`.row-${elY} .block-${elX}`);
-          if (!targetBlock.classList.contains("ending")) {
-              console.log(svgClass)
-              console.log(document.querySelector(svgClass))
-            remove(document.querySelector(svgClass));
-            $(".block").removeClass(blockClass);
-
-            targetBlock.classList.add(blockClass);
-            targetBlock.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class=${svgClass}><polygon points="5 3 19 12 5 21 5 3"/></svg>`;
-
-            //console.log(elY, elX);
-
-            mydiv1.style.top = y - 15 + "px";
-            mydiv1.style.left = x - 10 + "px";
-            startY = elY;
-            startX = elX;
+          if (typeof elY !== "undefined" && typeof elX !== "undefined") {
+            let targetBlock = document.querySelector(
+              `.row-${elY} .block-${elX}`,
+            );
+            if (!targetBlock.classList.contains("ending")) {
+              remove(document.querySelector(svgClass));
+              $(".block").removeClass(blockClass);
+              targetBlock.classList.add(blockClass);
+              if (blockClass === "starting") {
+                targetBlock.innerHTML = `<span></span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="startingsvg"><polygon points="5 3 19 12 5 21 5 3"/></svg>`;
+                startY = elY;
+                startX = elX;
+              } else {
+                targetBlock.innerHTML = `<span></span><svg class="endingsvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 20.9l4.95-4.95a7 7 0 1 0-9.9 0L12 20.9zm0 2.828l-6.364-6.364a9 9 0 1 1 12.728 0L12 23.728zM12 13a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm0 2a4 4 0 1 1 0-8 4 4 0 0 1 0 8z"/></svg>`;
+                endY = elY;
+                endX = elX;
+              }
+            }
           }
+        } else {
+          $(svgClass).off("mousedown")
+          doing = false;
         }
       });
-    } else {
-      console.log("x");
-      $(".area").off("mousemove");
     }
   });
 }
-moveHandler(".startingsvg","starting")
+movePoints(".startingsvg", "starting");
+movePoints(".endingsvg", "ending");
