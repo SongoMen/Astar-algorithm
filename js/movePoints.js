@@ -1,5 +1,6 @@
 let moving;
-
+let currentPoint;
+let currentPointSvg;
 document.body.onmousedown = function(x) {
   let target = x.path[0];
   if (
@@ -19,11 +20,11 @@ document.body.onmouseup = function() {
 const remove = el => el.parentElement.removeChild(el);
 
 function movePoints(svgClass, blockClass) {
-  console.log(arguments)
   $(svgClass).on("mousedown", function mouseState(e) {
+    currentPoint = blockClass;
+    currentPointSvg = svgClass;
     let elY, elX;
     if (e.type == "mousedown") {
-      console.log(this);
       $(".block").on("mousemove", function(e) {
         if (moving && !doing) {
           doing = true;
@@ -49,10 +50,8 @@ function movePoints(svgClass, blockClass) {
             }
             counter++;
           }
-
           var i = 0,
             il = counter;
-
           for (; i < il; i += 1) {
             stack[i].style.pointerEvents = "";
           }
@@ -60,11 +59,14 @@ function movePoints(svgClass, blockClass) {
             let targetBlock = document.querySelector(
               `.row-${elY} .block-${elX}`,
             );
-            if (!targetBlock.classList.contains("ending")) {
-              remove(document.querySelector(svgClass));
-              $(".block").removeClass(blockClass);
-              targetBlock.classList.add(blockClass);
-              if (blockClass === "starting") {
+            if (
+              !targetBlock.classList.contains("ending") ||
+              !targetBlock.classList.contains("starting")
+            ) {
+              remove(document.querySelector(currentPointSvg));
+              $(".block").removeClass(currentPoint);
+              targetBlock.classList.add(currentPoint);
+              if (currentPoint === "starting") {
                 targetBlock.innerHTML = `<span></span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="startingsvg"><polygon points="5 3 19 12 5 21 5 3"/></svg>`;
                 startY = elY;
                 startX = elX;
@@ -76,8 +78,8 @@ function movePoints(svgClass, blockClass) {
             }
           }
         } else {
-          $(svgClass).off("mousedown")
           doing = false;
+          return "";
         }
       });
     }
