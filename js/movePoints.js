@@ -33,7 +33,6 @@ function movePoints(svgClass, blockClass) {
           let counter = 0;
           let stack = [];
           let elementMouseIsOver = document.elementFromPoint(x, y);
-
           while (counter < 1) {
             stack.push(elementMouseIsOver);
             elementMouseIsOver.style.pointerEvents = "none";
@@ -50,7 +49,7 @@ function movePoints(svgClass, blockClass) {
             }
             counter++;
           }
-          var i = 0,
+          let i = 0,
             il = counter;
           for (; i < il; i += 1) {
             stack[i].style.pointerEvents = "";
