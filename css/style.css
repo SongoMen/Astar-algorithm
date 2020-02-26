@@ -138,10 +138,14 @@ h4 {
   border-bottom-left-radius: 0;
   border-top-left-radius: 0;
 }
-.startingsvg {
+.startingsvg,
+.endingsvg {
   width: 25px;
   height: 25px;
   position: absolute;
+}
+.mobile-info{
+  display: none
 }
 @media screen and (max-width: 1280px) {
   .flex h4 {
@@ -159,4 +163,19 @@ h4 {
   .header {
     padding: 10px 20px;
   }
+}
+@media screen and (max-width: 1000px){
+  body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .header{
+    display: none
+  }
+  .area{
+    display: none
+  }
+  .mobile-info{
+    display: block;
 }
